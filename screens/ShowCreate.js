@@ -31,7 +31,7 @@ class ShowCreate extends Component {
         const { data, title, date}  = this.state;
         return (<View style={styles.container}>
                 { data ?
-                    <CarouselPicker  entries={data}/>
+                    <CarouselPicker ref={(c) => this.carouselPicker = c} entries={data}/>
                     :
                     <View></View>
                 }

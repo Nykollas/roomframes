@@ -12,14 +12,14 @@ class Header extends Component{
     constructor(props){
         super(props);
     }
-    c
+    
     render = () => {
-        const  { backButton, saveButton } = this.props;
+        const  { backButton, saveButton, saveButtonCallback, screen, title } = this.props;
         return(
             <View style={styles.container}>
-                {backButton ? <BackButton/> : <></>}
-                <Text style={styles.title}>{this.props.title}</Text>
-                {saveButton ? <SaveButton/> : <></>}
+                {backButton ? <BackButton screen={screen} /> : <></>}
+                <Text style={styles.title}>{title}</Text>
+                {saveButton ? <SaveButton onPress={saveButtonCallback}/> : <></>}
             </View>
         )
     }

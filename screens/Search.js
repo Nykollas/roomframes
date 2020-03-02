@@ -8,6 +8,7 @@ import Main from './Main';
 import Icon from '../components/Icon';
 import IconButton from '../components/IconButton';
 
+
 class Search extends Component {
 
     state = {value:null, typying:false}
@@ -21,8 +22,21 @@ class Search extends Component {
         this.hideButton();
     }
 
+    wait = ()=>{
+        const {last_type} = this.state;
+        if(Date.now() - last_type  > 1500){
+            this.hideButton();
+        }
+    }
+
     setSearchValue = (value) => {
-        this.setState({value:value, typing:true})
+        const last_type = Date.now();
+        this.setState({
+            value:value, 
+            typing:true, 
+            last_type:last_type
+        });
+        setTimeout(this.wait, 1500);
         this.mainComponent.divideColumns();
     }
 
@@ -31,20 +45,21 @@ class Search extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.search_input_container}>
-                    <View style={styles.icon_container}>
-                        <Icon style={styles.icon} name="search"></Icon>
-                    </View>
-                    <TextInput 
+                        <View style={styles.icon_container}>
+                            <Icon style={styles.icon} name="search"></Icon> 
+                        </View>
+                        <TextInput  
                                ref = { (component) => {this.searchInput = component}}
                                placeholderTextColor={"gray"}
                                onEndEditing={this.hideButton} 
                                onChangeText={this.setSearchValue}
                                placeholder={"Search"}
                                style={styles.search_input}>
-                    </TextInput>
-                    <View style={styles.icon_container}>
-                        {this.state.typing ? <IconButton onPress={this.clear} style={styles.icon} name="close"></IconButton>:<></>}
-                    </View>
+                        </TextInput>
+                        <View style={styles.icon_container}>
+                            {this.state.typing ? <IconButton onPress={this.clear} style={styles.icon} name="close"></IconButton>:<></>}
+                        </View>
+                    
                 </View>
                 <Main screen="ShowSearch" navigation={navigation} ref={(component) => { this.mainComponent = component}} filter={this.state.value} ></Main>    
             </View>

@@ -20,9 +20,9 @@ const tabConfig = {
 }
 
 
+
 tabBarConfig = ({ route }) => ({
   tabBarIcon:({focused, color, size}) => {
-    
     if(route.name == "MainNavigator"){
       const icon = focused ? "active-squares" : "squares";
       return <Icon name={icon}></Icon>
@@ -49,11 +49,17 @@ const headerSettings = ({ scene, previous, navigation }) => {
         ? options.title
         : scene.route.name;
   if(title=="Search" ){
-    return <Header backButton title={title}></Header>
-  }else if(title=="Show" || title=="ShowSearch" || title=="AddPhoto"){
-    return <Header backButton ></Header>
+    return <Header  screen="Main" backButton title={title}></Header>
+  }else if(title=="Show"){
+    return <Header screen="Main" backButton ></Header>
+  }else if(title == "ShowSearch"){
+    return <Header screen="Search" backButton ></Header>
+  }else if(title == "Create" || title=="AddPhoto"){
+    return <Header backButton saveButton></Header>
   }else if(title == "Create"){
     return <Header backButton saveButton></Header>
+  }else if(title == "Create"){
+    return <Header backButton saveButton ></Header>
   }else{
     return <Header  title={title}></Header>
   }

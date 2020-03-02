@@ -27,6 +27,7 @@ class CustomCarousel extends Component {
 
     getEntries  = () => {
         const { entries } = this.state;
+        return entries;
     }
 
 

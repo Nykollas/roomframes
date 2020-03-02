@@ -8,13 +8,22 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 
-function BackButton(){
+const onPress = (screen, navigation) => {
+    if(screen && screen != ""){
+        navigation.navigate(screen);
+    }else{
+        navigation.goBack();
+    }
+}
+
+function BackButton(props){
         
 
         const navigation = useNavigation();
+        const { screen } = props;
         return (
                 <View style={styles.container}>
-                    <TouchableOpacity onPress={() => navigation.goBack() }>
+                    <TouchableOpacity onPress={() => onPress(screen, navigation) }>
                     <Image
                            style={styles.image}
                            resizeMode="contain"
